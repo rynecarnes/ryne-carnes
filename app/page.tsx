@@ -1,66 +1,62 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { Card } from '@/components/ui/Card';
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div>
+      <h1 style={{ fontSize: 'var(--text-3xl)', marginBottom: 'var(--space-2)', fontWeight: 600 }}>
+        Welcome back
+      </h1>
+      <p style={{ color: 'var(--color-text-secondary)', marginBottom: 'var(--space-8)' }}>
+        Select a tool from the navigation or below to get started.
+      </p>
+
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+        gap: 'var(--space-6)'
+      }}>
+        {/* Placeholder tool cards */}
+        <Link href="/home-runs" style={{ display: 'block', textDecoration: 'none' }}>
+          <Card style={{ cursor: 'pointer', height: '100%' }}>
+            <div style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '8px',
+              background: 'rgba(59, 130, 246, 0.1)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: 'var(--space-4)'
+            }}>
+              <span style={{ fontSize: '20px' }}>⚾️</span>
+            </div>
+            <h2 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-2)' }}>Home Runs</h2>
+            <p style={{ color: 'var(--color-text-secondary)', fontSize: 'var(--text-sm)', lineHeight: 1.5 }}>
+              Track, view, and analyze home run statistics and data.
+            </p>
+          </Card>
+        </Link>
+
+        <Card>
+          <div style={{
+            width: '40px',
+            height: '40px',
+            borderRadius: '8px',
+            background: 'rgba(139, 92, 246, 0.1)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: 'var(--space-4)'
+          }}>
+            <span style={{ fontSize: '20px' }}>⚙️</span>
+          </div>
+          <h2 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-2)' }}>Settings</h2>
+          <p style={{ color: 'var(--color-text-secondary)', fontSize: 'var(--text-sm)', lineHeight: 1.5 }}>
+            Manage account preferences, API keys, and global configuration options.
           </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+        </Card>
+      </div>
     </div>
   );
 }
