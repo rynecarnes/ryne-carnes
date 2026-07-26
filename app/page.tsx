@@ -37,25 +37,6 @@ export default function Home() {
             </p>
           </Card>
         </Link>
-
-        <Card>
-          <div style={{
-            width: '40px',
-            height: '40px',
-            borderRadius: '8px',
-            background: 'rgba(139, 92, 246, 0.1)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: 'var(--space-4)'
-          }}>
-            <span style={{ fontSize: '20px' }}>⚙️</span>
-          </div>
-          <h2 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-2)' }}>Settings</h2>
-          <p style={{ color: 'var(--color-text-secondary)', fontSize: 'var(--text-sm)', lineHeight: 1.5 }}>
-            Manage account preferences, API keys, and global configuration options.
-          </p>
-        </Card>
       </div>
     </div>
   );

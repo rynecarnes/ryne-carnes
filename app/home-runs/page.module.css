@@ -94,7 +94,7 @@
 .listItem {
   padding: var(--space-3) var(--space-4);
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: 6px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -103,8 +103,9 @@
 }
 
 .listItem:hover {
-  border-color: var(--color-border-glass);
+  border-color: var(--color-accent-blue);
   background: var(--color-bg-elevated);
+  box-shadow: inset 0 0 8px rgba(59, 130, 246, 0.2);
 }
 
 .playerName {
@@ -126,14 +127,15 @@
 .gameCard {
   background: var(--color-bg-elevated);
   border: 1px solid var(--color-border);
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.05);
 }
 
 .gameHeader {
   background: var(--color-bg-glass);
   padding: var(--space-4);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px dashed var(--color-border);
   text-align: center;
 }
 
@@ -161,13 +163,13 @@
 }
 
 .teamSection:first-child {
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px dashed var(--color-border);
 }
 
 @media (min-width: 640px) {
   .teamSection:first-child {
     border-bottom: none;
-    border-right: 1px solid var(--color-border);
+    border-right: 1px dashed var(--color-border);
   }
 }
 

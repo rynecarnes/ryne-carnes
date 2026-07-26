@@ -2,10 +2,10 @@
 
 :root {
   /* Backgrounds */
-  --color-bg-base:        #0A0F1E;   /* Deepest navy — page background */
-  --color-bg-surface:     #0F172A;   /* Card/panel background */
-  --color-bg-elevated:    #1E293B;   /* Hover states, elevated elements */
-  --color-bg-glass:       rgba(15, 23, 42, 0.6);  /* Glass card fill */
+  --color-bg-base:        #000000;   /* Pitch black */
+  --color-bg-surface:     #0A0A0A;   /* Card/panel background */
+  --color-bg-elevated:    #121212;   /* Hover states, elevated elements */
+  --color-bg-glass:       rgba(15, 15, 20, 0.7);  /* Glass card fill */
 
   /* Accents */
   --color-accent-blue:    #3B82F6;   /* Primary interactive / links */
@@ -18,8 +18,8 @@
   --color-text-muted:     #475569;
 
   /* Borders */
-  --color-border:         rgba(148, 163, 184, 0.1);
-  --color-border-glass:   rgba(148, 163, 184, 0.15);
+  --color-border:         rgba(59, 130, 246, 0.3); /* Subtle blue border */
+  --color-border-glass:   rgba(139, 92, 246, 0.4); /* Subtle purple border */
 
   /* Status */
   --color-success:        #10B981;
@@ -64,9 +64,15 @@
 body {
   background-color: var(--color-bg-base);
   color: var(--color-text-primary);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-space-mono), monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-vt323), monospace;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 a {
