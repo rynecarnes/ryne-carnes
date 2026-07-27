@@ -16,7 +16,6 @@ export default function Home() {
         gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
         gap: 'var(--space-6)'
       }}>
-        {/* Placeholder tool cards */}
         <Link href="/home-runs" style={{ display: 'block', textDecoration: 'none' }}>
           <Card style={{ cursor: 'pointer', height: '100%' }}>
             <div style={{
@@ -34,6 +33,26 @@ export default function Home() {
             <h2 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-2)' }}>Home Runs</h2>
             <p style={{ color: 'var(--color-text-secondary)', fontSize: 'var(--text-sm)', lineHeight: 1.5 }}>
               Track, view, and analyze home run statistics and data.
+            </p>
+          </Card>
+        </Link>
+        <Link href="/babytracker" style={{ display: 'block', textDecoration: 'none' }}>
+          <Card style={{ cursor: 'pointer', height: '100%' }}>
+            <div style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '8px',
+              background: 'rgba(59, 130, 246, 0.1)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: 'var(--space-4)'
+            }}>
+              <span style={{ fontSize: '20px' }}>🍼</span>
+            </div>
+            <h2 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-2)' }}>Babytracker</h2>
+            <p style={{ color: 'var(--color-text-secondary)', fontSize: 'var(--text-sm)', lineHeight: 1.5 }}>
+              Track baby feedings
             </p>
           </Card>
         </Link>

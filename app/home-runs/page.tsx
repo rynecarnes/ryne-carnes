@@ -8,6 +8,7 @@ import { Game } from '@/models/game';
 
 export default function HomeRunsPage() {
   const [date, setDate] = useState('');
+  const [searchDate, setSearchDate] = useState('');
   const [games, setGames] = useState<Game[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -23,6 +24,7 @@ export default function HomeRunsPage() {
       const data = await fetchHomeRunData(date);
 
       setGames(data.games || []);
+      setSearchDate(date);
     } catch (err) {
       console.error(err);
       setError('Failed to fetch home run data.');
@@ -70,7 +72,7 @@ export default function HomeRunsPage() {
 
         <div>
           <h2 style={{ fontSize: 'var(--text-xl)', marginBottom: 'var(--space-4)', fontWeight: 600 }}>
-            Results {date && games.length > 0 && `for ${date}`}
+            Results {searchDate && games.length > 0 && `for ${searchDate}`}
           </h2>
 
           {games.length > 0 ? (
