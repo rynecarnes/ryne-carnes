@@ -1,7 +1,11 @@
 import { Card } from '@/components/ui/Card';
 import Link from 'next/link';
+import { getLatestFeeding } from '@/lib/feedings';
+import { TimeSinceLastFeed } from '@/components/babytracker/TimeSinceLastFeed';
 
-export default function Home() {
+export default async function Home() {
+  const latestFeeding = await getLatestFeeding();
+
   return (
     <div>
       <h1 style={{ fontSize: 'var(--text-3xl)', marginBottom: 'var(--space-2)', fontWeight: 600 }}>
@@ -36,24 +40,31 @@ export default function Home() {
             </p>
           </Card>
         </Link>
+
         <Link href="/babytracker" style={{ display: 'block', textDecoration: 'none' }}>
           <Card style={{ cursor: 'pointer', height: '100%' }}>
             <div style={{
-              width: '40px',
-              height: '40px',
-              borderRadius: '8px',
-              background: 'rgba(59, 130, 246, 0.1)',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
+              gap: 'var(--space-3)',
               marginBottom: 'var(--space-4)'
             }}>
-              <span style={{ fontSize: '20px' }}>🍼</span>
+              <div style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '8px',
+                background: 'rgba(59, 130, 246, 0.1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+                <span style={{ fontSize: '20px' }}>🍼</span>
+              </div>
+              <h2 style={{ fontSize: 'var(--text-lg)', margin: 0 }}>Babytracker</h2>
             </div>
-            <h2 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-2)' }}>Babytracker</h2>
-            <p style={{ color: 'var(--color-text-secondary)', fontSize: 'var(--text-sm)', lineHeight: 1.5 }}>
-              Track baby feedings
-            </p>
+            <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: 'var(--space-2)' }}>
+              <TimeSinceLastFeed lastFeedingAt={latestFeeding?.started_at ?? null} compact />
+            </div>
           </Card>
         </Link>
       </div>

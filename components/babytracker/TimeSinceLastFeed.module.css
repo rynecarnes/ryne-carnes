@@ -1,0 +1,65 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-6);
+}
+
+.compact {
+  padding: var(--space-3) var(--space-4);
+  gap: var(--space-1);
+}
+
+.label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.compact .label {
+  font-size: var(--text-xs);
+}
+
+.timerText {
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  transition: color var(--transition-base);
+}
+
+.compact .timerText {
+  font-size: var(--text-2xl);
+}
+
+.green {
+  color: var(--color-success);
+  text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+.yellow {
+  color: var(--color-warning);
+  text-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+}
+
+.red {
+  color: var(--color-error);
+  text-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.lastFeedTime {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.compact .lastFeedTime {
+  font-size: var(--text-xs);
+}

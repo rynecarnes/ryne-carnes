@@ -1,0 +1,293 @@
+.calendar {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Date Navigation ── */
+
+.dateNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4);
+  background: var(--color-bg-glass);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.navButton:hover:not(:disabled) {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--color-accent-blue);
+  border-color: var(--color-accent-blue);
+}
+
+.navButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.dateCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.dateTitle {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.todayButton {
+  font-size: var(--text-xs);
+  color: var(--color-accent-blue);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: var(--transition-fast);
+}
+
+.todayButton:hover {
+  color: var(--color-accent-violet);
+}
+
+/* ── Day Summary ── */
+
+.daySummary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.summaryItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.summaryValue {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.summaryLabel {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.summaryDivider {
+  width: 1px;
+  height: 32px;
+  background: var(--color-border);
+}
+
+/* ── Timeline ── */
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-2) 0;
+}
+
+.hourRow {
+  display: grid;
+  grid-template-columns: 60px 24px 1fr;
+  min-height: 28px;
+  align-items: start;
+  transition: background var(--transition-fast);
+}
+
+.hourActive {
+  min-height: 48px;
+}
+
+.hourLabel {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-align: right;
+  padding-right: var(--space-2);
+  padding-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.hourActive .hourLabel {
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.hourLine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  height: 100%;
+}
+
+.hourLine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--color-border);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-border);
+  position: relative;
+  z-index: 1;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.hourActive .dot {
+  width: 10px;
+  height: 10px;
+  background: var(--color-accent-blue);
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+  margin-top: 4px;
+}
+
+.hourContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: 0 var(--space-3);
+  padding-top: 2px;
+  padding-bottom: var(--space-1);
+}
+
+/* ── Feeding Marker ── */
+
+.feedingMarker {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: rgba(59, 130, 246, 0.06);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  border-radius: 8px;
+  position: relative;
+  transition: var(--transition-fast);
+}
+
+.feedingMarker:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.feedingInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.feedingIcon {
+  color: var(--color-accent-blue);
+  flex-shrink: 0;
+}
+
+.feedingTime {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.feedingAmount {
+  font-size: var(--text-sm);
+  color: var(--color-accent-violet);
+  font-weight: 600;
+  padding: 1px 8px;
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 12px;
+}
+
+.feedingNotes {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.deleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  opacity: 0;
+  transition: var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.feedingMarker:hover .deleteButton {
+  opacity: 1;
+}
+
+.deleteButton:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--color-error);
+}
+
+/* ── Loading ── */
+
+.loading {
+  padding: var(--space-8);
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 480px) {
+  .hourRow {
+    grid-template-columns: 48px 20px 1fr;
+  }
+
+  .feedingMarker {
+    flex-wrap: wrap;
+  }
+
+  .feedingNotes {
+    flex-basis: 100%;
+    max-width: none;
+  }
+}
