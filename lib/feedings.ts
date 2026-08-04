@@ -24,20 +24,33 @@ export async function getLatestFeeding(): Promise<Feeding | null> {
 export async function getFeedingsForDate(dateStr: string): Promise<Feeding[]> {
   const supabase = await createClient();
 
-  // Build day boundaries for the given local date (dateStr: YYYY-MM-DD)
   const [year, month, day] = dateStr.split('-').map(Number);
-  const dayStart = new Date(year, month - 1, day, 0, 0, 0, 0).toISOString();
-  const dayEnd = new Date(year, month - 1, day, 23, 59, 59, 999).toISOString();
+  
+  // Create a broad UTC window covering the selected date in any timezone (-12 to +14 offset)
+  // Day start: target date minus 1 day at 00:00:00 UTC
+  // Day end: target date plus 2 days at 00:00:00 UTC
+  const rangeStart = new Date(Date.UTC(year, month - 1, day - 1, 0, 0, 0, 0)).toISOString();
+  const rangeEnd = new Date(Date.UTC(year, month - 1, day + 2, 0, 0, 0, 0)).toISOString();
 
+  // Fetch candidate feedings around this window
   const { data, error } = await supabase
     .from('feedings')
     .select('*')
-    .gte('started_at', dayStart)
-    .lte('started_at', dayEnd)
+    .gte('started_at', rangeStart)
+    .lte('started_at', rangeEnd)
     .order('started_at', { ascending: true });
 
   if (error || !data) return [];
-  return data as Feeding[];
+
+  // Filter in memory for timestamps whose local date string matches dateStr
+  return (data as Feeding[]).filter((feeding) => {
+    const feedingDate = new Date(feeding.started_at);
+    const fYear = feedingDate.getFullYear();
+    const fMonth = String(feedingDate.getMonth() + 1).padStart(2, '0');
+    const fDay = String(feedingDate.getDate()).padStart(2, '0');
+    const localDateStr = `${fYear}-${fMonth}-${fDay}`;
+    return localDateStr === dateStr;
+  });
 }
 
 /**
