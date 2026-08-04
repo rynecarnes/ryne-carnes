@@ -68,6 +68,14 @@ function formatHourLabel(hour: number): string {
   return `${hour - 12} PM`;
 }
 
+function getLocalDateStr(isoString: string): string {
+  const date = new Date(isoString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 function DailyCalendarInner({ feedings, selectedDate }: DailyCalendarProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -78,16 +86,19 @@ function DailyCalendarInner({ feedings, selectedDate }: DailyCalendarProps) {
     router.push(`/babytracker?${params.toString()}`);
   }
 
+  // Filter feedings for selected local date in browser timezone
+  const dayFeedings = feedings.filter((f) => getLocalDateStr(f.started_at) === selectedDate);
+
   // Group feedings by hour for the timeline
   const feedingsByHour = new Map<number, Feeding[]>();
-  for (const feeding of feedings) {
+  for (const feeding of dayFeedings) {
     const hour = getHour(feeding.started_at);
     if (!feedingsByHour.has(hour)) feedingsByHour.set(hour, []);
     feedingsByHour.get(hour)!.push(feeding);
   }
 
   // Total oz for the day
-  const totalOz = feedings.reduce((sum, f) => sum + Number(f.amount_oz), 0);
+  const totalOz = dayFeedings.reduce((sum, f) => sum + Number(f.amount_oz), 0);
 
   async function handleDelete(id: string) {
     await deleteFeedingAction(id);
