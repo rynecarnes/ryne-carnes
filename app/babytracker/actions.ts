@@ -16,10 +16,8 @@ export async function addFeedingAction(formData: FormData) {
     throw new Error('Start time is required');
   }
 
-  // Convert HTML datetime-local string (YYYY-MM-DDTHH:mm) to ISO string with user timezone
-  const isoStartedAt = new Date(startedAt).toISOString();
-
-  await addFeeding(amountOz, isoStartedAt, notes);
+  // startedAt is sent as an ISO 8601 string from the client browser
+  await addFeeding(amountOz, startedAt, notes);
   revalidatePath('/babytracker');
   revalidatePath('/');
 }

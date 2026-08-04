@@ -46,12 +46,16 @@ export function FeedingForm() {
           </label>
           <input
             id="started_at"
-            name="started_at"
             type="datetime-local"
             value={datetime}
             onChange={(e) => setDatetime(e.target.value)}
             required
             className={styles.input}
+          />
+          <input
+            type="hidden"
+            name="started_at"
+            value={datetime ? new Date(datetime).toISOString() : ''}
           />
         </div>
       </div>
