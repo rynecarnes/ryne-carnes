@@ -4,14 +4,19 @@ import { useState, useEffect } from 'react';
 import { addFeedingAction } from '@/app/babytracker/actions';
 import styles from '@/app/babytracker/page.module.css';
 
-function getDefaultDatetime(): string {
+function getDefaultDate(): string {
   const now = new Date();
   const year = now.getFullYear();
   const month = String(now.getMonth() + 1).padStart(2, '0');
   const day = String(now.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function getDefaultTime(): string {
+  const now = new Date();
   const hours = String(now.getHours()).padStart(2, '0');
   const minutes = String(now.getMinutes()).padStart(2, '0');
-  return `${year}-${month}-${day}T${hours}:${minutes}`;
+  return `${hours}:${minutes}`;
 }
 
 // Generate amount options from 3.00 to 10.00 in 0.25 increments
@@ -21,11 +26,18 @@ for (let oz = 3; oz <= 10; oz += 0.25) {
 }
 
 export function FeedingForm() {
-  const [datetime, setDatetime] = useState('');
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
 
   useEffect(() => {
-    setDatetime(getDefaultDatetime());
+    setDate(getDefaultDate());
+    setTime(getDefaultTime());
   }, []);
+
+  // Combine date + time into ISO string for submission
+  const combinedISO = date && time
+    ? new Date(`${date}T${time}`).toISOString()
+    : '';
 
   return (
     <form action={addFeedingAction} className={styles.form}>
@@ -52,24 +64,37 @@ export function FeedingForm() {
           </select>
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="started_at" className={styles.formLabel}>
+          <label htmlFor="feed_time" className={styles.formLabel}>
             Time
           </label>
           <input
-            id="started_at"
-            type="datetime-local"
-            value={datetime}
-            onChange={(e) => setDatetime(e.target.value)}
+            id="feed_time"
+            type="time"
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
             required
             className={styles.input}
           />
-          <input
-            type="hidden"
-            name="started_at"
-            value={datetime ? new Date(datetime).toISOString() : ''}
-          />
         </div>
       </div>
+      <div className={styles.formGroup}>
+        <label htmlFor="feed_date" className={styles.formLabel}>
+          Date
+        </label>
+        <input
+          id="feed_date"
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          required
+          className={styles.input}
+        />
+      </div>
+      <input
+        type="hidden"
+        name="started_at"
+        value={combinedISO}
+      />
       <div className={styles.formGroup}>
         <label htmlFor="notes" className={styles.formLabel}>
           Notes <span className={styles.optional}>(optional)</span>
