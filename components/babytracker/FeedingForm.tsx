@@ -103,7 +103,7 @@ export function FeedingForm() {
           id="notes"
           name="notes"
           rows={1}
-          placeholder="e.g. baby was fussy, supplemented with formula..."
+          placeholder="e.g. supplemented with formula"
           className={styles.textarea}
         />
       </div>
