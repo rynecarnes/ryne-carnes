@@ -14,6 +14,12 @@ function getDefaultDatetime(): string {
   return `${year}-${month}-${day}T${hours}:${minutes}`;
 }
 
+// Generate amount options from 3.00 to 10.00 in 0.25 increments
+const AMOUNT_OPTIONS: number[] = [];
+for (let oz = 3; oz <= 10; oz += 0.25) {
+  AMOUNT_OPTIONS.push(parseFloat(oz.toFixed(2)));
+}
+
 export function FeedingForm() {
   const [datetime, setDatetime] = useState('');
 
@@ -28,17 +34,22 @@ export function FeedingForm() {
           <label htmlFor="amount_oz" className={styles.formLabel}>
             Amount (oz)
           </label>
-          <input
+          <select
             id="amount_oz"
             name="amount_oz"
-            type="number"
-            step="0.25"
-            min="0.25"
-            max="20"
-            placeholder="4.0"
             required
-            className={styles.input}
-          />
+            defaultValue=""
+            className={styles.select}
+          >
+            <option value="" disabled>
+              Select oz
+            </option>
+            {AMOUNT_OPTIONS.map((oz) => (
+              <option key={oz} value={oz}>
+                {oz.toFixed(2)} oz
+              </option>
+            ))}
+          </select>
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="started_at" className={styles.formLabel}>
@@ -66,7 +77,7 @@ export function FeedingForm() {
         <textarea
           id="notes"
           name="notes"
-          rows={2}
+          rows={1}
           placeholder="e.g. baby was fussy, supplemented with formula..."
           className={styles.textarea}
         />
