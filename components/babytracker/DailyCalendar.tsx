@@ -143,8 +143,8 @@ function DailyCalendarInner({ feedings, selectedDate }: DailyCalendarProps) {
       {/* Day summary */}
       <div className={styles.daySummary}>
         <div className={styles.summaryItem}>
-          <span className={styles.summaryValue}>{feedings.length}</span>
-          <span className={styles.summaryLabel}>{feedings.length === 1 ? 'Feeding' : 'Feedings'}</span>
+          <span className={styles.summaryValue}>{dayFeedings.length}</span>
+          <span className={styles.summaryLabel}>{dayFeedings.length === 1 ? 'Feeding' : 'Feedings'}</span>
         </div>
         <div className={styles.summaryDivider} />
         <div className={styles.summaryItem}>
