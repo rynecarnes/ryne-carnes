@@ -16,6 +16,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Dashboard', href: '/' },
   { label: 'Home Runs', href: '/home-runs' },
   { label: 'Baby Tracker', href: '/babytracker' },
+  { label: 'Workouts', href: '/workouts' },
 ];
 
 export function TopNav() {
